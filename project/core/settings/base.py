@@ -20,7 +20,7 @@ PROJECT_ROOT = os.path.abspath(os.path.dirname(WEBSITE_ROOT))
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ''
+SECRET_KEY = 'rR7<{p^SAdu%>pGaDPXkld^5gv~ckHa+R3{eTmmDPXQB!=T1VuVzO!&j1a<ab7KyX!_2<+BPpX?'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,11 +37,24 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'pipeline',
-    # 'rest_framework',
+    'django.contrib.sites',
+
+    # third-party packages
+    'rest_framework',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'django_nose',
+
+    # internal packages
+    'api',
+    'accounts',
 )
 
+SITE_ID = 1
+
 MIDDLEWARE_CLASSES = (
+    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -49,10 +62,10 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
 )
 
 ROOT_URLCONF = 'core.urls'
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 TEMPLATES = [
     {
@@ -128,47 +141,37 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
-    # 'pipeline.finders.PipelineFinder',
 )
 
-# STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
-# PIPELINE_CSS_COMPRESSOR = None
-# PIPELINE_JS_COMPRESSOR = None
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+        'rest_framework.renderers.MultiPartRenderer',
+    ),
+}
 
-# PIPELINE_COMPILERS = (
-#     'pipeline.compilers.less.LessCompiler',
-#     'pipeline.compilers.coffee.CoffeeScriptCompiler',
-# )
+AUTH_USER_MODEL = 'accounts.User'
 
-# PIPELINE_CSS = {
-#     'styles': {
-#         'source_filenames': (
-#         ),
-#         'output_filename': '',
-#     },
-# }
-
-# PIPELINE_JS = {
-#     'scripts': {
-#         'source_filenames': (
-#         ),
-#         'output_filename': '',
-#     }
-# }
-
-
-# REST_FRAMEWORK = {
-#     'DEFAULT_PERMISSION_CLASSES': (
-#         'rest_framework.permissions.IsAuthenticated',
-#     ),
-#     'DEFAULT_AUTHENTICATION_CLASSES': (
-#         'rest_framework.authentication.SessionAuthentication',
-#         'rest_framework.authentication.BasicAuthentication',
-#     ),
-#     'DEFAULT_RENDERER_CLASSES': (
-#         'rest_framework.renderers.JSONRenderer',
-#         # 'rest_framework.renderers.JSONPRenderer',
-#         'rest_framework.renderers.MultiPartRenderer',
-#     ),
-# }
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]

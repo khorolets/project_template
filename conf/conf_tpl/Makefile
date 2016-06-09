@@ -3,7 +3,7 @@
 
 ROOT_DIR = `pwd`/..
 MANAGE=`pwd`/project/manage.py
-SETTINGS='core.settings.{{PROJECT_ENV}}}'
+SETTINGS='core.settings.{{PROJECT_MODE}}'
 
 update:
 	@git stash
