@@ -19,7 +19,7 @@ server {
         }
 
         location / {
-          uwsgi_pass  django;
+          uwsgi_pass  django-project;
           include uwsgi_params;
         }
 

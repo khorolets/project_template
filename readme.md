@@ -14,6 +14,15 @@ from django.utils.crypto import get_random_string
 print "SECRET_KEY = '%s'" % get_random_string(length=75, allowed_chars=string.digits + string.letters + string.punctuation)
 Just copy/paste this in your settings file.
 ```
+```
+# Python3
+import string
+from django.utils.crypto import get_random_string
+
+print ("SECRET_KEY = '%s'" % get_random_string(length=75, allowed_chars=''.join(set(string.digits + string.ascii_letters + string.punctuation) - set('\'"'))))
+# Just copy/paste this in your settings file.
+```
+
 
 or just generate it online (if You are using python 3):
 
