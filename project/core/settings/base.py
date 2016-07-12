@@ -78,6 +78,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
+### SQLITE ###
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -88,6 +89,24 @@ DATABASES = {
         # 'PORT': 5432
     }
 }
+### SQLITE ###
+
+# ## POSTGRESQL ###
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'project_db',
+#         'USER': 'project_usr',
+#         'PASSWORD': 'project_db_password',
+#         'HOST': 'localhost',
+#         'PORT': 5432
+#     }
+# }
+# # CREATE DATABASE project_db;
+# # CREATE USER project_usr with password 'project_db_password';
+# # GRANT ALL PRIVILEGES ON DATABASE project_db to project_usr;
+#
+# ## POSTGRESQL ###
 
 
 # Internationalization
