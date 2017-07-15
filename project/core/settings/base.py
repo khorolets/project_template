@@ -37,8 +37,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'pipeline',
-    # 'rest_framework',
+
+    'accounts',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -83,10 +83,6 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'project.db',
-        # 'USER': '',
-        # 'PASSWORD': '',
-        # 'HOST': '',
-        # 'PORT': 5432
     }
 }
 ### SQLITE ###
@@ -102,11 +98,30 @@ DATABASES = {
 #         'PORT': 5432
 #     }
 # }
-# # CREATE DATABASE project_db;
-# # CREATE USER project_usr with password 'project_db_password';
-# # GRANT ALL PRIVILEGES ON DATABASE project_db to project_usr;
-#
 # ## POSTGRESQL ###
+
+
+SITE_ID = 1
+
+AUTH_USER_MODEL = 'accounts.User'
+
+# Password validation
+# https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
+
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
 
 
 # Internationalization
@@ -147,47 +162,4 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
-    # 'pipeline.finders.PipelineFinder',
 )
-
-# STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
-
-# PIPELINE_CSS_COMPRESSOR = None
-# PIPELINE_JS_COMPRESSOR = None
-
-# PIPELINE_COMPILERS = (
-#     'pipeline.compilers.less.LessCompiler',
-#     'pipeline.compilers.coffee.CoffeeScriptCompiler',
-# )
-
-# PIPELINE_CSS = {
-#     'styles': {
-#         'source_filenames': (
-#         ),
-#         'output_filename': '',
-#     },
-# }
-
-# PIPELINE_JS = {
-#     'scripts': {
-#         'source_filenames': (
-#         ),
-#         'output_filename': '',
-#     }
-# }
-
-
-# REST_FRAMEWORK = {
-#     'DEFAULT_PERMISSION_CLASSES': (
-#         'rest_framework.permissions.IsAuthenticated',
-#     ),
-#     'DEFAULT_AUTHENTICATION_CLASSES': (
-#         'rest_framework.authentication.SessionAuthentication',
-#         'rest_framework.authentication.BasicAuthentication',
-#     ),
-#     'DEFAULT_RENDERER_CLASSES': (
-#         'rest_framework.renderers.JSONRenderer',
-#         # 'rest_framework.renderers.JSONPRenderer',
-#         'rest_framework.renderers.MultiPartRenderer',
-#     ),
-# }

@@ -1,6 +1,5 @@
 Django
 ipdb
 ipython
-django-debug-toolbar
 uwsgi
 psycopg2

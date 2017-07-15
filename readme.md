@@ -1,29 +1,28 @@
 Start new project like this
-`django-admin.py startproject --template=https://github.com/regqueryvalueex/project_template/zipball/master project`
+`django-admin.py startproject --template=https://github.com/khorolets/project_template/zipball/refactor_template project`
 
-Rename project to YOUR real projectname.
-Create your local settings in settings directrory.
-Provide readme for your project.
-Your ready to go.
-If you wish to make random string for your SECRET_KEY setting, you just need to type the following in interactive mode:
+Rename `project` to YOUR real project name.
 
-````
-import string
-from django.utils.crypto import get_random_string
+Update local settings in settings directrory.
 
-print "SECRET_KEY = '%s'" % get_random_string(length=75, allowed_chars=string.digits + string.letters + string.punctuation)
-Just copy/paste this in your settings file.
-```
-```
-# Python3
-import string
-from django.utils.crypto import get_random_string
+You need to provide random string for `SECRET_KEY` in `project/core/settings/base.py`.
 
-print ("SECRET_KEY = '%s'" % get_random_string(length=75, allowed_chars=''.join(set(string.digits + string.ascii_letters + string.punctuation) - set('\'"'))))
-# Just copy/paste this in your settings file.
+You can use following oneliner:
+
+```shell
+$ python -c "import string; from django.utils.crypto import get_random_string; print (\"SECRET_KEY = '%s'\" % get_random_string(length=75, allowed_chars=''.join(set(string.digits + string.ascii_letters + string.punctuation) - set('\'\"'))))"
 ```
 
+or just generate it online (if You are using python 3) with  [django-secret-key-generator](http://www.miniwebtool.com/django-secret-key-generator/)
 
-or just generate it online (if You are using python 3):
+Then just copy-paste it to `project/core/settings/base.py`
 
-[django-secret-key-generator](http://www.miniwebtool.com/django-secret-key-generator/)
+Then
+
+```shell
+$ python manage migrate
+$ python manage createsuperuser
+$ python manage runserver
+```
+
+You're ready to go!
