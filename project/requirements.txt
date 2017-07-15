@@ -1,5 +1,4 @@
 Django
 ipdb
 ipython
-uwsgi
 psycopg2

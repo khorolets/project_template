@@ -1,0 +1,28 @@
+version: '2'
+services:
+  django:
+    restart: always
+    build: ./project/.
+    ports:
+     - 8000:8000
+    links:
+      - postgres
+    depends_on:
+      - postgres
+    environment:
+      - DJANGO_SETTINGS_MODULE=core.settings.docker
+      - PG_HOST=postgres # needs for waiting Postgres to start
+      - PG_USER=project_user # needs for waiting Postgres to start
+      - PG_DATABASE=project_db # needs for waiting Postgres to start
+      - PGPASSWORD=/xA8MBEcg#;v9V)5 # needs for waiting Postgres to start
+    volumes:
+      - ./persistant/media_root:/opt/www/media_root
+
+  postgres:
+    image: kiasaki/alpine-postgres:9.5
+    environment:
+      - POSTGRES_PASSWORD=/xA8MBEcg#;v9V)5
+      - POSTGRES_DB=project_db
+      - POSTGRES_USER=project_user
+    volumes:
+      - ./persistant/pgdata:/var/lib/postgresql/data
